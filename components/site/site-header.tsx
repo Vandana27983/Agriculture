@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react'
 import { Leaf, Menu } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button, buttonVariants } from '@/components/ui/button'
+import { LanguageSwitcher } from '@/components/site/language-switcher'
+import { useLanguage } from '@/lib/language-store'
 import {
   Sheet,
   SheetContent,
@@ -18,6 +20,7 @@ export function SiteHeader() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const { __ } = useLanguage()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16)
@@ -60,17 +63,18 @@ export function SiteHeader() {
                   : 'text-foreground/70 hover:text-foreground',
               )}
             >
-              {link.label}
+              {__(link.translationKey)}
             </Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
+          <LanguageSwitcher />
           <Link
             href="/contact"
             className={cn(buttonVariants({ size: 'lg' }), 'hidden sm:inline-flex')}
           >
-            Get a Quote
+            {__('btn.getQuote')}
           </Link>
 
           <Sheet open={open} onOpenChange={setOpen}>
@@ -106,7 +110,7 @@ export function SiteHeader() {
                         : 'text-foreground/80 hover:bg-secondary/60',
                     )}
                   >
-                    {link.label}
+                    {__(link.translationKey)}
                   </Link>
                 ))}
                 <Link
@@ -114,7 +118,7 @@ export function SiteHeader() {
                   onClick={() => setOpen(false)}
                   className={cn(buttonVariants({ size: 'lg' }), 'mt-3')}
                 >
-                  Get a Quote
+                  {__('btn.getQuote')}
                 </Link>
               </nav>
             </SheetContent>

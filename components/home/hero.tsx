@@ -6,8 +6,11 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { companyStats } from '@/lib/data'
+import { useLanguage } from '@/lib/language-store'
 
 export function Hero() {
+  const { __ } = useLanguage()
+
   return (
     <section className="relative isolate overflow-hidden">
       <Image
@@ -36,7 +39,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mt-5 text-balance font-heading text-4xl font-semibold leading-tight text-background sm:text-5xl lg:text-6xl"
           >
-            Premium farm supplies and expert agronomy in one place
+            {__('hero.homeTitle')}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 24 }}
@@ -44,9 +47,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-5 max-w-xl text-pretty text-lg leading-relaxed text-background/85"
           >
-            From certified seeds and fertilizers to soil testing and irrigation
-            planning, Verdant Fields helps your farm grow stronger and yield
-            more, season after season.
+            {__('hero.homeSubtitle')}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 24 }}

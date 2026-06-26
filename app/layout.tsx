@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Geist } from 'next/font/google'
 import { Fraunces } from 'next/font/google'
 import { Toaster } from '@/components/ui/sonner'
+import { BodyWrapper } from '@/components/site/body-wrapper'
 import './globals.css'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
@@ -54,9 +55,11 @@ export default function RootLayout({
       className={`${geistSans.variable} ${fraunces.variable} bg-background`}
     >
       <body className="font-sans antialiased">
-        {children}
-        <Toaster position="top-center" richColors />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <BodyWrapper>
+          {children}
+          <Toaster position="top-center" richColors />
+          {process.env.NODE_ENV === 'production' && <Analytics />}
+        </BodyWrapper>
       </body>
     </html>
   )

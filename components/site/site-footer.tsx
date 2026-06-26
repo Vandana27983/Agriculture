@@ -1,6 +1,9 @@
+'use client'
+
 import Link from 'next/link'
 import { Leaf, Mail, MapPin, Phone } from 'lucide-react'
 import { navLinks } from '@/lib/nav'
+import { useLanguage } from '@/lib/language-store'
 
 const productLinks = [
   { href: '/products?category=Seeds', label: 'Seeds' },
@@ -10,6 +13,9 @@ const productLinks = [
 ]
 
 export function SiteFooter() {
+  const { __ } = useLanguage()
+  const year = new Date().getFullYear()
+
   return (
     <footer className="bg-sidebar text-sidebar-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
@@ -23,14 +29,13 @@ export function SiteFooter() {
             </span>
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-sidebar-foreground/70">
-            Premium farm supplies and expert agronomy services helping farms
-            grow stronger, season after season.
+            {__('footer.tagline')}
           </p>
         </div>
 
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wide text-sidebar-foreground/90">
-            Explore
+            {__('footer.explore')}
           </h3>
           <ul className="mt-4 space-y-2.5 text-sm">
             {navLinks.map((link) => (
@@ -39,7 +44,7 @@ export function SiteFooter() {
                   href={link.href}
                   className="text-sidebar-foreground/70 transition-colors hover:text-sidebar-foreground"
                 >
-                  {link.label}
+                  {__(link.translationKey)}
                 </Link>
               </li>
             ))}
@@ -48,7 +53,7 @@ export function SiteFooter() {
 
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wide text-sidebar-foreground/90">
-            Products
+            {__('footer.products')}
           </h3>
           <ul className="mt-4 space-y-2.5 text-sm">
             {productLinks.map((link) => (
@@ -66,12 +71,12 @@ export function SiteFooter() {
 
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wide text-sidebar-foreground/90">
-            Get in touch
+            {__('footer.getInTouch')}
           </h3>
           <ul className="mt-4 space-y-3 text-sm text-sidebar-foreground/70">
             <li className="flex items-start gap-3">
               <MapPin className="mt-0.5 size-4 shrink-0" />
-              <span>1420 Harvest Road, Greenfield, CA 93927</span>
+              <span>{__('contact.address')}</span>
             </li>
             <li className="flex items-center gap-3">
               <Phone className="size-4 shrink-0" />
@@ -95,8 +100,7 @@ export function SiteFooter() {
       <div className="border-t border-sidebar-border">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-xs text-sidebar-foreground/60 sm:flex-row sm:px-6 lg:px-8">
           <p>
-            &copy; {new Date().getFullYear()} Verdant Fields. All rights
-            reserved.
+            {__('footer.copyright', { year: String(year) })}
           </p>
           <div className="flex items-center gap-5">
             <Link href="/admin" className="hover:text-sidebar-foreground">
